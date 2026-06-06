@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TodoService } from '../../services/todo';
+import { Todo } from '../../models/todo';
 
 @Component({
   selector: 'app-list-todos',
@@ -14,9 +15,15 @@ export class ListTodos {
     this.todos = this.todoService.todos;
   }
 
-  editTodo(id: number) {}
+  editTodo(todo: Todo) {
+    this.todoService.edit(todo);
+  }
 
   deleteTodo(id: number) {
     this.todoService.remove(id);
+  }
+
+  toggleStatus(id: number) {
+    this.todoService.toggleStatus(id);
   }
 }

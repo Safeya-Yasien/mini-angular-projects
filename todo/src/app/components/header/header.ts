@@ -12,5 +12,4 @@ export class Header {
 
   completedTasks = this.todoService.completed;
   pendingTasks = this.todoService.pending;
-  inProgressTasks = this.todoService.inProgress;
 }

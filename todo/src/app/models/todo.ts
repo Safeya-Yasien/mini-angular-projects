@@ -1,4 +1,4 @@
-type TodoStatus = 'pending' | 'completed' | 'in-progress';
+type TodoStatus = 'pending' | 'completed';
 
 export interface Todo {
   id: number;

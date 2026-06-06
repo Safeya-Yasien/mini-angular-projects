@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, ElementRef, ViewChild } from '@angular/core';
 import { TodoService } from '../../services/todo';
 import { FormsModule } from '@angular/forms';
 
@@ -11,12 +11,40 @@ import { FormsModule } from '@angular/forms';
 export class AddTodo {
   todoTitle: string = '';
 
-  constructor(private todoService: TodoService) {}
+  @ViewChild('todoInput') todoInput!: ElementRef<HTMLInputElement>;
+
+  constructor(private todoService: TodoService) {
+    effect(() => {
+      const editing = this.todoService.editingTodo();
+      this.todoTitle = editing ? editing.title : '';
+
+      if (editing) {
+        setTimeout(() => {
+          this.todoInput.nativeElement.focus();
+          this.todoInput.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 0);
+      }
+    });
+  }
+
+  get isEditing() {
+    return this.todoService.editingTodo();
+  }
+
+  cancelEdit() {
+    this.todoService.editingTodo.set(null);
+    this.todoTitle = '';
+  }
 
   onSubmit() {
-    if (this.todoTitle.trim()) {
-      this.todoService.add(this.todoTitle);
-      this.todoTitle = '';
+    if (!this.todoTitle.trim()) return;
+
+    if (this.isEditing) {
+      this.todoService.update(this.isEditing.id, this.todoTitle);
+    } else {
+      this.todoService.add(this.todoTitle.trim());
     }
+
+    this.todoTitle = '';
   }
 }
