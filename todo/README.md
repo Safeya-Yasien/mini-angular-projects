@@ -1,6 +1,6 @@
 # Todo App 📝
 
-![Todo App Screenshot](/live.png)
+![Todo App Screenshot](public/live.png)
 
 ## 🔗 Links
 
