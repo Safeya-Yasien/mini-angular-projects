@@ -86,4 +86,10 @@ export class TodoService {
     });
     localStorage.setItem('todos', JSON.stringify(this.todos()));
   }
+
+  resetFilters() {
+    this.search.set('');
+    this.sort.set('date');
+    this.status.set('all');
+  }
 }

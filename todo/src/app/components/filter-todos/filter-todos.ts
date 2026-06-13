@@ -17,4 +17,8 @@ export class FilterTodos {
   onFilterChange() {
     this.todoService.setFilters(this.search, this.sort, this.status);
   }
+
+  onResetFilters(){
+    this.todoService.resetFilters()
+  }
 }

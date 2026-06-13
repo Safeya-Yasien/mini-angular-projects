@@ -65,7 +65,8 @@
 
     <button
       title="Reset Filters"
-      class="flex items-center justify-center px-3 py-2.5 border border-gray-200 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-colors duration-150"
+      (click)="onResetFilters()"
+      class="cursor-pointer flex items-center justify-center px-3 py-2.5 border border-gray-200 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-colors duration-150"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
