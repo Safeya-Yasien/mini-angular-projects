@@ -18,7 +18,10 @@ export class FilterTodos {
     this.todoService.setFilters(this.search, this.sort, this.status);
   }
 
-  onResetFilters(){
-    this.todoService.resetFilters()
+  onResetFilters() {
+    this.search = '';
+    this.sort = 'date';
+    this.status = 'all';
+    this.todoService.resetFilters();
   }
 }
