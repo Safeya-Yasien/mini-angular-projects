@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TodoService } from '../../services/todo';
 import { Todo } from '../../models/todo';
 
@@ -9,21 +9,18 @@ import { Todo } from '../../models/todo';
   styleUrl: './list-todos.css',
 })
 export class ListTodos {
-  todos;
-
-  constructor(private todoService: TodoService) {
-    this.todos = this.todoService.todos;
-  }
+  todosService = inject(TodoService);
+  todos = this.todosService.filteredTodos;
 
   editTodo(todo: Todo) {
-    this.todoService.edit(todo);
+    this.todosService.edit(todo);
   }
 
   deleteTodo(id: number) {
-    this.todoService.remove(id);
+    this.todosService.remove(id);
   }
 
   toggleStatus(id: number) {
-    this.todoService.toggleStatus(id);
+    this.todosService.toggleStatus(id);
   }
 }

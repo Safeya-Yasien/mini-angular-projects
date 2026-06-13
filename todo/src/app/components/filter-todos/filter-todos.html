@@ -1,6 +1,7 @@
 <div
   class="grid grid-cols-1 md:grid-cols-12 gap-3 mb-6 bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
 >
+  <!-- Search - col 6 -->
   <div class="relative md:col-span-6">
     <span
       class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400"
@@ -11,7 +12,7 @@
         viewBox="0 0 24 24"
         stroke-width="2"
         stroke="currentColor"
-        class="w-4 h-4"
+        class="w-5 h-5"
       >
         <path
           stroke-linecap="round"
@@ -22,36 +23,64 @@
     </span>
     <input
       type="text"
+      [(ngModel)]="search"
+      (ngModelChange)="onFilterChange()"
       placeholder="Search tasks..."
-      class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+      class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
     />
   </div>
 
+  <!-- Sort - col 3 -->
   <div class="md:col-span-3">
     <select
-      class="w-full px-3 py-2 border border-gray-200 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none bg-no-repeat bg-right pr-8"
+      [(ngModel)]="sort"
+      (ngModelChange)="onFilterChange()"
+      class="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none bg-no-repeat bg-right pr-8"
       style="
         background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22292.4%22 height=%22292.4%22><path fill=%22%23666%22 d=%22M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z%22/></svg>');
         background-size: 0.65em auto;
       "
     >
-      <option>Sort by: Date</option>
-      <option>Sort by: Status</option>
-      <option>Sort by: Name</option>
+      <option value="date">Sort by: Date</option>
+      <option value="name">Sort by: Name</option>
+      <option value="status">Sort by: Status</option>
     </select>
   </div>
 
-  <div class="md:col-span-3">
+  <!-- Status + Reset - col 3 -->
+  <div class="md:col-span-3 flex gap-2">
     <select
-      class="w-full px-3 py-2 border border-gray-200 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none bg-no-repeat bg-right pr-8"
+      [(ngModel)]="status"
+      (ngModelChange)="onFilterChange()"
+      class="flex-1 px-3 py-2.5 border border-gray-200 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none bg-no-repeat bg-right pr-8"
       style="
         background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22292.4%22 height=%22292.4%22><path fill=%22%23666%22 d=%22M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z%22/></svg>');
         background-size: 0.65em auto;
       "
     >
-      <option>All Tasks</option>
-      <option>Pending</option>
-      <option>Completed</option>
+      <option value="all">All Tasks</option>
+      <option value="pending">Pending</option>
+      <option value="completed">Completed</option>
     </select>
+
+    <button
+      title="Reset Filters"
+      class="flex items-center justify-center px-3 py-2.5 border border-gray-200 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-500 hover:border-red-200 transition-colors duration-150"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-5 h-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+        />
+      </svg>
+    </button>
   </div>
 </div>

@@ -247,7 +247,7 @@ User submits form (AddTodo)
 
 ```bash
 # Clone the repository
-git clone https://github.com/Safeya-Yasien/<repo-name>.git
+git clone https://github.com/Safeya-Yasien/mini-angular-projects/tree/master/todo.git
 
 # Install dependencies
 npm install

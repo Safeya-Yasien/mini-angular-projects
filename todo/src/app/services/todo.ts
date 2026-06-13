@@ -9,8 +9,26 @@ export class TodoService {
   index: number = this.todos().length + 1;
   editingTodo = signal<Todo | null>(null);
 
+  search = signal('');
+  sort = signal('date');
+  status = signal('all');
+
   completed = computed(() => this.todos().filter((todo) => todo.status === 'completed').length);
   pending = computed(() => this.todos().filter((todo) => todo.status === 'pending').length);
+  filteredTodos = computed(() =>
+    this.todos()
+      .filter((todo) =>
+        this.search() ? todo.title.toLowerCase().includes(this.search().toLowerCase()) : true,
+      )
+      .filter((todo) => (this.status() !== 'all' ? todo.status === this.status() : true))
+      .sort((a, b) => {
+        if (this.sort() === 'date') return new Date(b.date).getTime() - new Date(a.date).getTime();
+        if (this.sort() === 'name') return a.title.localeCompare(b.title);
+        if (this.sort() === 'status') return a.status.localeCompare(b.status);
+
+        return 0;
+      }),
+  );
 
   constructor() {}
 
@@ -32,6 +50,12 @@ export class TodoService {
 
   edit(todo: Todo) {
     this.editingTodo.set(todo);
+  }
+
+  setFilters(search: string, sort: string, status: string) {
+    this.search.set(search);
+    this.sort.set(sort);
+    this.status.set(status);
   }
 
   update(id: number, title: string) {
